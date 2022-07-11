@@ -4,7 +4,7 @@ dotenv.config()
 
 import Fastify, { FastifyInstance } from 'fastify'
 
-import { healthCheck, getPiRecord } from './services/service.query'
+import { healthCheck, getPiRecord, getSunCircumference } from './services/service.query'
 import { resetPiRecords } from './services/service.mutate'
 
 const fastify: FastifyInstance = Fastify({})
@@ -12,6 +12,7 @@ const fastify: FastifyInstance = Fastify({})
 // GETTERS
 fastify.get('/health/check', healthCheck)
 fastify.get('/pi', getPiRecord)
+fastify.get('/circumference/sun', getSunCircumference)
 
 // SETTERS
 fastify.post('/pi/reset', resetPiRecords)
