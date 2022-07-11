@@ -49,7 +49,8 @@ export const getPiRecord = async (request, reply) => {
 
 export const getSunCircumference = async (request, reply) => {
   try {
-    await generatePiRecord(1)
+    const hasDecimalQuery = !!(request.query && request.query.increase) && !!Number(request.query.increase)
+    await generatePiRecord(hasDecimalQuery ? Number(request.query.increase) : 1)
 
     const existingPiRecord = await PiIteration.findOne().sort({ decimals: -1 }).lean()
 
