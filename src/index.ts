@@ -3,11 +3,17 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import Fastify, { FastifyInstance } from 'fastify'
+import fastifyCors from '@fastify/cors'
 
 import { healthCheck, getPiRecord, getSunCircumference } from './services/service.query'
 import { resetPiRecords } from './services/service.mutate'
 
 const fastify: FastifyInstance = Fastify({})
+
+fastify.register(require('@fastify/cors'), {
+  methods: ['GET', 'POST'],
+  origin: '*',
+})
 
 // GETTERS
 fastify.get('/health/check', healthCheck)
